@@ -16,6 +16,16 @@ services:
     envVars:
       - key: APP_ENV
         value: production
+      - key: DB_HOST
+        value: mvc-mysql
+      - key: DB_PORT
+        value: "3306"
+      - key: DB_NAME
+        value: web2
+      - key: DB_USER
+        value: appuser
+      - key: DB_PASS
+        sync: false
       # Ejemplo DB (si luego conectas a MySQL externo):
       # - key: DB_HOST
       #   value: your-db-host
@@ -25,3 +35,25 @@ services:
       #   value: your-db-user
       # - key: DB_PASS
       #   sync: false # defínelo en el dashboard para ocultarlo
+
+  # Servicio Privado (Base de Datos MySQL)
+  - type: pserv
+    name: mvc-mysql
+    plan: free
+    region: oregon
+    runtime: image
+    image: mysql:8.0
+    autoDeploy: false
+    envVars:
+      - key: MYSQL_DATABASE
+        value: web2
+      - key: MYSQL_USER
+        value: appuser
+      - key: MYSQL_PASSWORD
+        sync: false
+      - key: MYSQL_ROOT_PASSWORD
+        sync: false
+    disks:
+      - name: data
+        mountPath: /var/lib/mysql
+        sizeGB: 1
