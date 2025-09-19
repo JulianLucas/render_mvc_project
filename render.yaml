@@ -16,15 +16,15 @@ services:
     envVars:
       - key: APP_ENV
         value: production
-      # Configura aquí la conexión a una base de datos EXTERNA (p. ej. Railway, PlanetScale)
+      # Configuración para MySQL externo (Railway)
       - key: DB_HOST
-        value: your-mysql-host
+        value: yamanote.proxy.rlwy.net
       - key: DB_PORT
-        value: "3306"
+        value: "18587"
       - key: DB_NAME
-        value: web2
+        value: railway
       - key: DB_USER
-        value: your-mysql-user
+        value: root
       - key: DB_PASS
         sync: false # define el secreto en el Dashboard
       - key: DB_SSL
