@@ -5,7 +5,7 @@ FROM php:8.2-apache
 RUN a2enmod rewrite
 
 # Opcional: instalar extensiones comunes de PHP (agrega las que necesites)
-# RUN docker-php-ext-install pdo pdo_mysql mysqli
+RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 # Copiamos el código al DocumentRoot
 COPY . /var/www/html/
