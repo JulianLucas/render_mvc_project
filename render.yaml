@@ -41,8 +41,8 @@ services:
     name: mvc-mysql
     plan: free
     region: oregon
-    runtime: image
-    image: mysql:8.0
+    runtime: docker
+    dockerfilePath: ./db/Dockerfile
     autoDeploy: false
     envVars:
       - key: MYSQL_DATABASE
