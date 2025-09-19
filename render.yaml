@@ -1,0 +1,27 @@
+# Render Infrastructure as Code
+# Referencia: https://render.com/docs/infrastructure-as-code
+services:
+  - type: web
+    name: mvc-project-backend
+    env: docker
+    plan: free
+    region: oregon
+    autoDeploy: true
+    branch: main
+    # Dockerfile en la raíz del repo
+    dockerfilePath: ./Dockerfile
+    # Render deduce el start por CMD del Dockerfile
+    healthCheckPath: /
+    # Variables de entorno opcionales para tu app PHP
+    envVars:
+      - key: APP_ENV
+        value: production
+      # Ejemplo DB (si luego conectas a MySQL externo):
+      # - key: DB_HOST
+      #   value: your-db-host
+      # - key: DB_NAME
+      #   value: your-db-name
+      # - key: DB_USER
+      #   value: your-db-user
+      # - key: DB_PASS
+      #   sync: false # defínelo en el dashboard para ocultarlo

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Web2 - CRUD Usuarios</title>
+  <meta name="description" content="Aplicación demo CRUD de usuarios con PHP y MySQL (patrón MVC).">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <header class="site-header" role="banner">
+    <div class="container">
+      <h1>Web2 · Usuarios</h1>
+    </div>
+  </header>
+
+  <nav class="site-nav" role="navigation" aria-label="Principal">
+    <div class="container">
+      <ul>
+        <li><a href="index.html" aria-current="page">Inicio</a></li>
+        <li><a href="listar.php">Listar</a></li>
+        <li><a href="login.php">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="contenido" class="container" role="main">
+    <section aria-labelledby="titulo-registro">
+      <h2 id="titulo-registro">Registrar usuario</h2>
+      <form action="controller/registro.php" method="POST" aria-describedby="ayuda-registro">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input id="nombre" name="nombre" type="text" autocomplete="name" required aria-required="true" placeholder="Ej. Juan Pérez" />
+        </div>
+        <button type="submit" class="btn">Registrar</button>
+        <p id="ayuda-registro" class="form-help">Ingresa el nombre del usuario y presiona Registrar.</p>
+      </form>
+    </section>
+
+    <section aria-labelledby="titulo-acciones">
+      <h2 id="titulo-acciones">Otras acciones</h2>
+      <div class="actions">
+        <a class="btn secondary" href="listar.php" role="button" aria-label="Ir a la lista de usuarios">Ver lista de usuarios</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <small>&copy; 2025 Web2. Proyecto educativo.</small>
+    </div>
+  </footer>
+
+  <noscript>
+    <p>Esta página funciona mejor con JavaScript habilitado, pero el formulario es totalmente funcional sin él.</p>
+  </noscript>
+</body>
+</html>
