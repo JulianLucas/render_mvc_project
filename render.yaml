@@ -12,46 +12,24 @@ services:
     dockerfilePath: ./Dockerfile
     # Render deduce el start por CMD del Dockerfile
     healthCheckPath: /
-    # Variables de entorno opcionales para tu app PHP
+    # Variables de entorno para tu app PHP
     envVars:
       - key: APP_ENV
         value: production
+      # Configura aquí la conexión a una base de datos EXTERNA (p. ej. Railway, PlanetScale)
       - key: DB_HOST
-        value: mvc-mysql
+        value: your-mysql-host
       - key: DB_PORT
         value: "3306"
       - key: DB_NAME
         value: web2
       - key: DB_USER
-        value: appuser
+        value: your-mysql-user
       - key: DB_PASS
-        sync: false
+        sync: false # define el secreto en el Dashboard
       - key: DB_SSL
-        value: "false"
-      # Ejemplo DB (si luego conectas a MySQL externo):
-      # - key: DB_HOST
-      #   value: your-db-host
-      # - key: DB_NAME
-      #   value: your-db-name
-      # - key: DB_USER
-      #   value: your-db-user
-      # - key: DB_PASS
-      #   sync: false # defínelo en el dashboard para ocultarlo
+        value: "false" # cambia a "true" si tu proveedor exige SSL (p. ej. PlanetScale)
 
-  # Servicio Privado (Base de Datos MySQL)
-  - type: pserv
-    name: mvc-mysql
-    plan: free
-    region: oregon
-    runtime: docker
-    dockerfilePath: ./db/Dockerfile
-    autoDeploy: false
-    envVars:
-      - key: MYSQL_DATABASE
-        value: web2
-      - key: MYSQL_USER
-        value: appuser
-      - key: MYSQL_PASSWORD
-        sync: false
-      - key: MYSQL_ROOT_PASSWORD
-        sync: false
+  # Nota: Los servicios privados (pserv) no están disponibles en el plan free de Render.
+  # Usa un proveedor externo gratuito (Railway para MySQL es el más sencillo) y coloca
+  # sus credenciales en las variables DB_* de este servicio web.
