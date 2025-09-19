@@ -14,8 +14,8 @@ COPY . /var/www/html/
 RUN sed -ri 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf || true
 
 # Script de arranque para ajustar Apache al puerto proporcionado por Render ($PORT)
-COPY .render/apache-run.sh /usr/local/bin/apache-run
-RUN chmod +x /usr/local/bin/apache-run
+COPY render/apache-run.sh /usr/local/bin/apache-run
+RUN sed -i 's/\r$//' /usr/local/bin/apache-run && chmod +x /usr/local/bin/apache-run
 
 # Exponer el puerto (informativo). Render asigna $PORT en runtime.
 EXPOSE 80
