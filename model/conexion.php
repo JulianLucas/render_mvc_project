@@ -5,10 +5,21 @@ $db_name = getenv('DB_NAME') ?: 'web2';
 $db_user = getenv('DB_USER') ?: 'root';
 $db_pass = getenv('DB_PASS') ?: '';
 $db_port = (int)(getenv('DB_PORT') ?: 3306);
+$db_ssl  = strtolower((string)(getenv('DB_SSL') ?: 'false')) === 'true';
 
-// Conexión MySQLi usando host, usuario, contraseña, base y puerto
-$conexion = mysqli_connect($db_host, $db_user, $db_pass, $db_name, $db_port);
-if (!$conexion) {
+// Conexión MySQLi: usamos mysqli_init para poder habilitar SSL si se requiere (p. ej. PlanetScale)
+$conexion = mysqli_init();
+if ($db_ssl) {
+    // Para proveedores como PlanetScale, no se requieren archivos de certificado al usar mysqlnd.
+    // Activamos SSL y forzamos el flag MYSQLI_CLIENT_SSL
+    mysqli_ssl_set($conexion, null, null, null, null, null);
+    $flags = MYSQLI_CLIENT_SSL;
+} else {
+    $flags = 0;
+}
+
+// Conectar (host, usuario, contraseña, base, puerto)
+if (!@mysqli_real_connect($conexion, $db_host, $db_user, $db_pass, $db_name, $db_port, null, $flags)) {
     http_response_code(500);
     echo "Error de conexión a MySQL: " . mysqli_connect_error();
     exit;

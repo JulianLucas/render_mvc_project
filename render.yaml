@@ -53,7 +53,7 @@ services:
         sync: false
       - key: MYSQL_ROOT_PASSWORD
         sync: false
-    disks:
-      - name: data
-        mountPath: /var/lib/mysql
-        sizeGB: 1
+    disk:
+      name: data
+      mountPath: /var/lib/mysql
+      sizeGB: 1
